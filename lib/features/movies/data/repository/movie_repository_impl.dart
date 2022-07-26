@@ -4,13 +4,17 @@ import 'package:tmdb_clean_architecture/features/movies/data/datasources/remote_
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie.dart';
 import 'package:tmdb_clean_architecture/core/error/failures.dart';
 import 'package:dartz/dartz.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_credits.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_details.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_images.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_keywords.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_review.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/repository/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   final _remoteDatasource = MoviesRemoteDatasourceImpl();
   // final _localDatasource = MoviesLocalDatasourceImple();
-  final _networkInfo = NetworkInfoImpl();
+  // final _networkInfo = NetworkInfoImpl();
 
   @override
   Future<Either<Failure, Movie>> getPopularMovies(int? page) async {
@@ -46,7 +50,7 @@ class MovieRepositoryImpl implements MovieRepository {
       return Left(ServerFailure(message: e.message));
     }
   }
-  
+
   @override
   Future<Either<Failure, Movie>> getNowPlayingMovies(int? page) async {
     try {
@@ -61,6 +65,56 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, Movie>> getTopRatedMovies(int? page) async {
     try {
       final result = await _remoteDatasource.getTopRatedMovies(page);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MovieCredits>> getMovieCredits(int movieId) async {
+    try {
+      final result = await _remoteDatasource.getMovieCredits(movieId);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MovieReview>> getMovieReviews(int movieId) async {
+    try {
+      final result = await _remoteDatasource.getMovieReviews(movieId);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MovieImages>> getMovieImages(int movieId) async {
+    try {
+      final result = await _remoteDatasource.getMovieImages(movieId);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Movie>> getRecommendations(int movieId) async {
+    try {
+      final result = await _remoteDatasource.getRecommendations(movieId);
+      return Right(result);
+    } on ServerException catch (e) {
+      return Left(ServerFailure(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, MovieKeywords>> getMovieKeywords(int movieId) async {
+    try {
+      final result = await _remoteDatasource.getMovieKeywords(movieId);
       return Right(result);
     } on ServerException catch (e) {
       return Left(ServerFailure(message: e.message));

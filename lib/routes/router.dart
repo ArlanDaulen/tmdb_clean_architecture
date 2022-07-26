@@ -13,7 +13,6 @@ import 'package:tmdb_clean_architecture/features/series/presentation/pages/serie
   // replaceInRouteName: 'Page, Route',
   routes: [
     AutoRoute(
-      // path: '/',
       page: HomePage,
       initial: true,
       children: [

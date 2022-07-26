@@ -1,3 +1,6 @@
+import 'dart:convert' as c;
+import 'dart:developer';
+
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/result.dart';
 
 class ResultModel extends Result {

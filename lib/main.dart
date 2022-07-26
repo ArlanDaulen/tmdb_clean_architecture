@@ -9,11 +9,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final appRouter = AppRouter();
-    return   MaterialApp.router(
+    return MaterialApp.router(
+      theme: ThemeData(
+        fontFamily: 'Montserrat',
+      ),
       debugShowCheckedModeBanner: false,
       routerDelegate: appRouter.delegate(),
       routeInformationParser: appRouter.defaultRouteParser(),

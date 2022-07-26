@@ -3,16 +3,28 @@ import 'dart:developer';
 
 import 'package:tmdb_clean_architecture/core/error/exceptions.dart';
 import 'package:tmdb_clean_architecture/features/movies/data/models/movie_details_model.dart';
+import 'package:tmdb_clean_architecture/features/movies/data/models/movie_images_model.dart';
+import 'package:tmdb_clean_architecture/features/movies/data/models/movie_keywords_model.dart';
 import 'package:tmdb_clean_architecture/features/movies/data/models/movie_model.dart';
+import 'package:tmdb_clean_architecture/features/movies/data/models/movie_review_model.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie.dart';
 import 'package:http/http.dart' as http;
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_credits.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_details.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_images.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_keywords.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_review.dart';
 
 abstract class MoviesRemoteDatasource {
   Future<Movie> getPopularMovies(int? page);
   Future<Movie> getTopRatedMovies(int? page);
   Future<Movie> getNowPlayingMovies(int? page);
+  Future<Movie> getRecommendations(int movieId);
   Future<MovieDetails> getMovieDetails(int movieId);
+  Future<MovieCredits> getMovieCredits(int movieId);
+  Future<MovieReview> getMovieReviews(int movieId);
+  Future<MovieImages> getMovieImages(int movieId);
+  Future<MovieKeywords> getMovieKeywords(int movieId);
 }
 
 class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
@@ -43,10 +55,65 @@ class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
 
   @override
   Future<MovieDetails> getMovieDetails(int movieId) async {
-    final response = await _client.get(
-        Uri.parse('${_baseUrl}movie/$movieId?api_key=$_apiKey&language=en-US'));
+    final response = await _client
+        .get(Uri.parse('$_baseUrl$movieId?api_key=$_apiKey&language=en-US'));
     if (response.statusCode == 200) {
       return MovieDetailsModel.fromJson(json.decode(response.body));
+    } else {
+      return handleError(response);
+    }
+  }
+
+  @override
+  Future<MovieCredits> getMovieCredits(int movieId) async {
+    final response = await _client.get(
+        Uri.parse('$_baseUrl$movieId/credits?api_key=$_apiKey&language=en-US'));
+    if (response.statusCode == 200) {
+      return MovieCredits.fromJson(json.decode(response.body));
+    } else {
+      return handleError(response);
+    }
+  }
+
+  @override
+  Future<MovieReview> getMovieReviews(int movieId) async {
+    final response = await _client.get(
+        Uri.parse('$_baseUrl$movieId/reviews?api_key=$_apiKey&language=en-US'));
+    if (response.statusCode == 200) {
+      return MovieReviewModel.fromJson(json.decode(response.body));
+    } else {
+      return handleError(response);
+    }
+  }
+
+  @override
+  Future<MovieImages> getMovieImages(int movieId) async {
+    final response = await _client.get(
+        Uri.parse('$_baseUrl$movieId/images?api_key=$_apiKey&language=en-US'));
+    if (response.statusCode == 200) {
+      return MovieImagesModel.fromJson(json.decode(response.body));
+    } else {
+      return handleError(response);
+    }
+  }
+
+  @override
+  Future<Movie> getRecommendations(int movieId) async {
+    final response = await _client.get(Uri.parse(
+        '$_baseUrl$movieId/recommendations?api_key=$_apiKey&language=en-US'));
+    if (response.statusCode == 200) {
+      return MovieModel.fromJson(json.decode(response.body));
+    } else {
+      return handleError(response);
+    }
+  }
+
+  @override
+  Future<MovieKeywords> getMovieKeywords(int movieId) async {
+    final response = await _client.get(Uri.parse(
+        '$_baseUrl$movieId/keywords?api_key=$_apiKey&language=en-US'));
+    if (response.statusCode == 200) {
+      return MovieKeywordsModel.fromJson(json.decode(response.body));
     } else {
       return handleError(response);
     }

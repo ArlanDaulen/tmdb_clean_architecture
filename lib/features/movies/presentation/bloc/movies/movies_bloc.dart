@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb_clean_architecture/features/movies/data/repository/movie_repository_impl.dart';
-import 'package:tmdb_clean_architecture/features/movies/presentation/bloc/movies_event.dart';
-import 'package:tmdb_clean_architecture/features/movies/presentation/bloc/movies_state.dart';
+import 'package:tmdb_clean_architecture/features/movies/presentation/bloc/movies/movies_event.dart';
+import 'package:tmdb_clean_architecture/features/movies/presentation/bloc/movies/movies_state.dart';
 
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final _repository = MovieRepositoryImpl();

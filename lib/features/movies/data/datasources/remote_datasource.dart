@@ -11,20 +11,21 @@ import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie.da
 import 'package:http/http.dart' as http;
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_credits.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_details.dart';
-import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_images.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/images.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_keywords.dart';
-import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_review.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/review.dart';
 
 abstract class MoviesRemoteDatasource {
   Future<Movie> getPopularMovies(int? page);
   Future<Movie> getTopRatedMovies(int? page);
   Future<Movie> getNowPlayingMovies(int? page);
+  Future<Movie> getUpcoming(int? page);
   Future<Movie> getRecommendations(int movieId);
   Future<MovieDetails> getMovieDetails(int movieId);
   Future<MovieCredits> getMovieCredits(int movieId);
-  Future<MovieReview> getMovieReviews(int movieId);
-  Future<MovieImages> getMovieImages(int movieId);
-  Future<MovieKeywords> getMovieKeywords(int movieId);
+  Future<Review> getReviews(int id);
+  Future<Images> getImages(int id);
+  Future<MovieOrTvKeywords> getKeywords(int id);
 }
 
 class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
@@ -54,6 +55,9 @@ class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
       _getMovies(page, 'now_playing');
 
   @override
+  Future<Movie> getUpcoming(int? page) => _getMovies(page, 'upcoming');
+
+  @override
   Future<MovieDetails> getMovieDetails(int movieId) async {
     final response = await _client
         .get(Uri.parse('$_baseUrl$movieId?api_key=$_apiKey&language=en-US'));
@@ -76,22 +80,22 @@ class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
   }
 
   @override
-  Future<MovieReview> getMovieReviews(int movieId) async {
+  Future<Review> getReviews(int id) async {
     final response = await _client.get(
-        Uri.parse('$_baseUrl$movieId/reviews?api_key=$_apiKey&language=en-US'));
+        Uri.parse('$_baseUrl$id/reviews?api_key=$_apiKey&language=en-US'));
     if (response.statusCode == 200) {
-      return MovieReviewModel.fromJson(json.decode(response.body));
+      return ReviewModel.fromJson(json.decode(response.body));
     } else {
       return handleError(response);
     }
   }
 
   @override
-  Future<MovieImages> getMovieImages(int movieId) async {
+  Future<Images> getImages(int id) async {
     final response = await _client.get(
-        Uri.parse('$_baseUrl$movieId/images?api_key=$_apiKey&language=en-US'));
+        Uri.parse('$_baseUrl$id/images?api_key=$_apiKey&language=en-US'));
     if (response.statusCode == 200) {
-      return MovieImagesModel.fromJson(json.decode(response.body));
+      return ImagesModel.fromJson(json.decode(response.body));
     } else {
       return handleError(response);
     }
@@ -109,9 +113,9 @@ class MoviesRemoteDatasourceImpl implements MoviesRemoteDatasource {
   }
 
   @override
-  Future<MovieKeywords> getMovieKeywords(int movieId) async {
-    final response = await _client.get(Uri.parse(
-        '$_baseUrl$movieId/keywords?api_key=$_apiKey&language=en-US'));
+  Future<MovieOrTvKeywords> getKeywords(int id) async {
+    final response = await _client.get(
+        Uri.parse('$_baseUrl$id/keywords?api_key=$_apiKey&language=en-US'));
     if (response.statusCode == 200) {
       return MovieKeywordsModel.fromJson(json.decode(response.body));
     } else {

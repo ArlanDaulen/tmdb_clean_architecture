@@ -1,7 +1,7 @@
-import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_review.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/review.dart';
 
-class MovieReviewModel extends MovieReview {
-  MovieReviewModel({
+class ReviewModel extends Review {
+  ReviewModel({
     required super.id,
     required super.page,
     required super.results,
@@ -9,10 +9,10 @@ class MovieReviewModel extends MovieReview {
     required super.totalResults,
   });
 
-  factory MovieReviewModel.fromJson(Map<String, dynamic> json) {
+  factory ReviewModel.fromJson(Map<String, dynamic> json) {
     final results = <ReviewResult>[];
     json['results'].forEach((v) => ReviewResultModel.fromJson(v));
-    return MovieReviewModel(
+    return ReviewModel(
       id: json['id'],
       page: json['page'],
       results: results,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tmdb_clean_architecture/shared/utils.dart';
 
 class DefaultText extends StatelessWidget {
   const DefaultText(

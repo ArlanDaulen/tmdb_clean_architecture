@@ -2,17 +2,17 @@ import 'dart:developer';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:tmdb_clean_architecture/shared/constants/utils.dart';
+import 'package:tmdb_clean_architecture/shared/utils.dart';
 import 'package:tmdb_clean_architecture/shared/widgets/default_text.dart';
 
-class Review extends StatefulWidget {
-  const Review({Key? key}) : super(key: key);
+class ReviewWidget extends StatefulWidget {
+  const ReviewWidget({Key? key}) : super(key: key);
 
   @override
-  State<Review> createState() => _ReviewState();
+  State<ReviewWidget> createState() => _ReviewState();
 }
 
-class _ReviewState extends State<Review> {
+class _ReviewState extends State<ReviewWidget> {
   bool isHidden = true;
 
   @override

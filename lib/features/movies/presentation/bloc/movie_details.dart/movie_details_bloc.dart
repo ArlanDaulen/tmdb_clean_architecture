@@ -14,10 +14,10 @@ class MovieDetailsBloc extends Bloc<MovieDetailsEvent, MovieDetailsState> {
       emit(MovieDetailsLoading());
       final details = await _repository.getMovieDetails(movieId);
       final credits = await _repository.getMovieCredits(movieId);
-      final reviews = await _repository.getMovieReviews(movieId);
-      final images = await _repository.getMovieImages(movieId);
+      final reviews = await _repository.getReviews(movieId);
+      final images = await _repository.getImages(movieId);
       final recommendations = await _repository.getRecommendations(movieId);
-      final keywords = await _repository.getMovieKeywords(movieId);
+      final keywords = await _repository.getKeywords(movieId);
 
       details.fold(
         (l) => emit(MovieDetailsLoadError(message: l.message!)),

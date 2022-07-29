@@ -7,17 +7,40 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final _repository = MovieRepositoryImpl();
 
   MoviesBloc(super.initialState) {
-    on<LoadMovies>((event, emit) async {
+    on<LoadPopularMovies>((event, emit) async {
       emit(MoviesLoading());
       final popular = await _repository.getPopularMovies(null);
-      final topRated = await _repository.getTopRatedMovies(null);
-      final nowPlaying = await _repository.getNowPlayingMovies(null);
+      popular.fold(
+        (l) => emit(MoviesLoadError(message: l.message!)),
+        (r) => emit(PopularMoviesLoaded(popular: r)),
+      );
+    });
 
-      emit(MoviesLoaded(
-        popular: popular,
-        nowPlaying: nowPlaying,
-        topeRated: topRated,
-      ));
+    on<LoadTopRatedMovies>((event, emit) async {
+      emit(MoviesLoading());
+      final topRated = await _repository.getTopRatedMovies(null);
+      topRated.fold(
+        (l) => emit(MoviesLoadError(message: l.message!)),
+        (r) => emit(TopRatedMoviesLoaded(topRated: r)),
+      );
+    });
+
+    on<LoadUpcomingMovies>((event, emit) async {
+      emit(MoviesLoading());
+      final upcoming = await _repository.getUpcoming(null);
+      upcoming.fold(
+        (l) => emit(MoviesLoadError(message: l.message!)),
+        (r) => emit(UpcomingMoviesLoaded(upcoming: r)),
+      );
+    });
+
+    on<LoadNowPlayingMovies>((event, emit) async {
+      emit(MoviesLoading());
+      final nowPlaying = await _repository.getNowPlayingMovies(null);
+      nowPlaying.fold(
+        (l) => emit(MoviesLoadError(message: l.message!)),
+        (r) => emit(NowPlayingMoviesLoaded(nowPlaying: r)),
+      );
     });
   }
 }

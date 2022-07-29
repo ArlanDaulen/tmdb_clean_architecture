@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_details.dart';
-import 'package:tmdb_clean_architecture/shared/constants/utils.dart';
+import 'package:tmdb_clean_architecture/shared/utils.dart';
 import 'package:tmdb_clean_architecture/shared/widgets/default_text.dart';
 
 class VoteAverage extends StatelessWidget {

@@ -1,4 +1,4 @@
-class Result {
+class MovieResult {
   final String? posterPath;
   final bool adult;
   final String overview;
@@ -14,7 +14,7 @@ class Result {
   final bool video;
   final num voteAverage;
 
-  Result({
+  MovieResult({
     this.posterPath,
     required this.adult,
     required this.overview,

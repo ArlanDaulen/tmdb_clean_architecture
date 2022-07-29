@@ -1,9 +1,9 @@
-class MovieImages {
+class Images {
   int id;
   List<BackdropsAndPosters> backdrops;
   List<BackdropsAndPosters> posters;
 
-  MovieImages({
+  Images({
     required this.id,
     required this.backdrops,
     required this.posters,

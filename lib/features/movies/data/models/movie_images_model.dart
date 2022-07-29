@@ -1,20 +1,20 @@
-import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_images.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/images.dart';
 
-class MovieImagesModel extends MovieImages {
-  MovieImagesModel({
+class ImagesModel extends Images {
+  ImagesModel({
     required super.id,
     required super.backdrops,
     required super.posters,
   });
 
-  factory MovieImagesModel.fromJson(Map<String, dynamic> json) {
+  factory ImagesModel.fromJson(Map<String, dynamic> json) {
     final backdrops = <BackdropsAndPosters>[];
     json['backdrops']
         .forEach((v) => backdrops.add(BackdropsAndPostersModel.fromJson(v)));
     final posters = <BackdropsAndPostersModel>[];
     json['posters']
         .forEach((v) => posters.add(BackdropsAndPostersModel.fromJson(v)));
-    return MovieImagesModel(
+    return ImagesModel(
       id: json['id'],
       backdrops: backdrops,
       posters: posters,

@@ -2,7 +2,7 @@ import 'package:tmdb_clean_architecture/features/movies/domain/entities/result.d
 
 class Movie {
   final int page;
-  final List<Result> results;
+  final List<MovieResult> results;
   final int totalResults;
   final int totalPages;
 

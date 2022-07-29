@@ -3,8 +3,8 @@ import 'dart:developer';
 
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/result.dart';
 
-class ResultModel extends Result {
-  ResultModel(
+class MovieResultModel extends MovieResult {
+  MovieResultModel(
       {super.posterPath,
       required super.adult,
       required super.overview,
@@ -20,10 +20,10 @@ class ResultModel extends Result {
       required super.video,
       required super.voteAverage});
 
-  factory ResultModel.fromJson(Map<String, dynamic> json) {
+  factory MovieResultModel.fromJson(Map<String, dynamic> json) {
     final genres = <int>[];
     json['genre_ids'].forEach((v) => genres.add(v));
-    return ResultModel(
+    return MovieResultModel(
       posterPath: json['poster_path'],
       adult: json['adult'],
       overview: json['overview'],

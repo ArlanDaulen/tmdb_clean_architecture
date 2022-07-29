@@ -1,6 +1,6 @@
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_keywords.dart';
 
-class MovieKeywordsModel extends MovieKeywords {
+class MovieKeywordsModel extends MovieOrTvKeywords {
   MovieKeywordsModel({required super.id, required super.keywords});
 
   factory MovieKeywordsModel.fromJson(Map<String, dynamic> json) {

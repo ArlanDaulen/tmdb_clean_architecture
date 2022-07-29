@@ -4,9 +4,9 @@ import 'package:tmdb_clean_architecture/core/error/failures.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_credits.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_details.dart';
-import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_images.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/images.dart';
 import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_keywords.dart';
-import 'package:tmdb_clean_architecture/features/movies/domain/entities/movie_review.dart';
+import 'package:tmdb_clean_architecture/features/movies/domain/entities/review.dart';
 
 abstract class MovieDetailsState {}
 
@@ -15,10 +15,10 @@ class MovieDetailsLoading extends MovieDetailsState {}
 class MovieDetailsLoaded extends MovieDetailsState {
   final MovieDetails movie;
   final Either<Failure, MovieCredits> credits;
-  final Either<Failure, MovieReview> reviews;
-  final Either<Failure, MovieImages> images;
+  final Either<Failure, Review> reviews;
+  final Either<Failure, Images> images;
   final Either<Failure, Movie> recommendations;
-  final Either<Failure, MovieKeywords> keywords;
+  final Either<Failure, MovieOrTvKeywords> keywords;
   MovieDetailsLoaded({
     required this.movie,
     required this.credits,

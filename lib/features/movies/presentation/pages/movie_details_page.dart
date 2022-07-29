@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,13 +6,13 @@ import 'package:intl/intl.dart';
 import 'package:tmdb_clean_architecture/features/movies/presentation/bloc/movie_details.dart/movie_details_bloc.dart';
 import 'package:tmdb_clean_architecture/features/movies/presentation/bloc/movie_details.dart/movie_details_event.dart';
 import 'package:tmdb_clean_architecture/features/movies/presentation/bloc/movie_details.dart/movie_details_state.dart';
-import 'package:tmdb_clean_architecture/features/movies/presentation/widgets/movies_list.dart';
-import 'package:tmdb_clean_architecture/features/movies/presentation/widgets/review.dart';
-import 'package:tmdb_clean_architecture/features/movies/presentation/widgets/vote_average.dart';
-import 'package:tmdb_clean_architecture/shared/constants/utils.dart';
+import 'package:tmdb_clean_architecture/shared/widgets/review.dart';
+import 'package:tmdb_clean_architecture/shared/widgets/vote_average.dart';
+import 'package:tmdb_clean_architecture/shared/utils.dart';
 import 'package:tmdb_clean_architecture/shared/widgets/default_text.dart';
 import 'package:palette_generator/palette_generator.dart';
 import 'package:tmdb_clean_architecture/shared/widgets/default_title.dart';
+import 'package:tmdb_clean_architecture/shared/widgets/movie_or_tv_listview.dart';
 
 class MovieDetailsPage extends StatelessWidget {
   const MovieDetailsPage({Key? key, @PathParam() required this.movieId})
@@ -378,7 +377,7 @@ class MovieDetailsPage extends StatelessWidget {
               ),
               state.reviews.fold(
                 (l) => DefaultText(l.message ?? 'No Reviews'),
-                (r) => const Review(),
+                (r) => const ReviewWidget(),
               ),
               const DefaultTitle('Media'),
               state.images.fold(
@@ -431,7 +430,11 @@ class MovieDetailsPage extends StatelessWidget {
                 (l) => DefaultText(l.message ?? 'No Recommentations'),
                 (r) => SizedBox(
                   height: 280,
-                  child: MovieList(movies: r.results),
+                  child: MovieOrTvListView(
+                    isMovie: true,
+                    movies: r.results,
+                    isReplace: true,
+                  ),
                 ),
               ),
             ],

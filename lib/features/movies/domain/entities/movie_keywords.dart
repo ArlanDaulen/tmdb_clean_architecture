@@ -1,8 +1,8 @@
-class MovieKeywords {
+class MovieOrTvKeywords {
   int id;
   List<Keywords> keywords;
 
-  MovieKeywords({required this.id, required this.keywords});
+  MovieOrTvKeywords({required this.id, required this.keywords});
 }
 
 class Keywords {

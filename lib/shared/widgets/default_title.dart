@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:tmdb_clean_architecture/shared/constants/utils.dart';
+import 'package:tmdb_clean_architecture/shared/utils.dart';
 import 'package:tmdb_clean_architecture/shared/widgets/default_text.dart';
 
 class DefaultTitle extends StatelessWidget {

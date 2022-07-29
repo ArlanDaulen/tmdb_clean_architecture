@@ -1,11 +1,11 @@
-class MovieReview {
+class Review {
   int id;
   int page;
   List<ReviewResult> results;
   int totalPages;
   int totalResults;
 
-  MovieReview({
+  Review({
     required this.id,
     required this.page,
     required this.results,

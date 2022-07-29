@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tmdb_clean_architecture/home_page.dart';
 import 'package:tmdb_clean_architecture/routes/router.gr.dart';
 
 void main() {

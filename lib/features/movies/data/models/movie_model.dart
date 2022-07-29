@@ -9,9 +9,9 @@ class MovieModel extends Movie {
       required super.totalPages});
 
   factory MovieModel.fromJson(Map<String, dynamic> json) {
-    final results = <ResultModel>[];
+    final results = <MovieResultModel>[];
     json['results'].forEach((v) {
-      results.add(ResultModel.fromJson(v));
+      results.add(MovieResultModel.fromJson(v));
     });
     return MovieModel(
       page: json['page'],

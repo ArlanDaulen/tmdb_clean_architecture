@@ -7,20 +7,27 @@ abstract class MoviesState {}
 
 class MoviesLoading extends MoviesState {}
 
-class MoviesLoaded extends MoviesState {
-  final Either<Failure, Movie> popular;
-  final Either<Failure, Movie> topeRated;
-  final Either<Failure, Movie> nowPlaying;
-  MoviesLoaded({
-    required this.popular,
-    required this.nowPlaying,
-    required this.topeRated,
-  });
+class PopularMoviesLoaded extends MoviesState {
+  final Movie popular;
+  PopularMoviesLoaded({required this.popular});
+}
+
+class TopRatedMoviesLoaded extends MoviesState {
+  final Movie topRated;
+  TopRatedMoviesLoaded({required this.topRated});
+}
+
+class UpcomingMoviesLoaded extends MoviesState {
+  final Movie upcoming;
+  UpcomingMoviesLoaded({required this.upcoming});
+}
+
+class NowPlayingMoviesLoaded extends MoviesState {
+  final Movie nowPlaying;
+  NowPlayingMoviesLoaded({required this.nowPlaying});
 }
 
 class MoviesLoadError extends MoviesState {
-  final String? message;
+  final String message;
   MoviesLoadError({required this.message});
 }
-
-

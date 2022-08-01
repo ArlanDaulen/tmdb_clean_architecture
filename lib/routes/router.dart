@@ -7,6 +7,7 @@ import 'package:tmdb_clean_architecture/features/movies/presentation/pages/movie
 import 'package:tmdb_clean_architecture/features/movies/presentation/pages/movies_page.dart';
 import 'package:tmdb_clean_architecture/features/people/presentation/pages/people_details_page.dart';
 import 'package:tmdb_clean_architecture/features/people/presentation/pages/people_page.dart';
+import 'package:tmdb_clean_architecture/features/people/presentation/pages/people_wrapper.dart';
 import 'package:tmdb_clean_architecture/features/series/presentation/pages/series_details_page.dart';
 import 'package:tmdb_clean_architecture/features/series/presentation/pages/series_page.dart';
 import 'package:tmdb_clean_architecture/features/series/presentation/pages/series_wrapper.dart';
@@ -46,8 +47,9 @@ import 'package:tmdb_clean_architecture/home_screen.dart';
         ),
         AutoRoute(
           path: 'people',
-          page: PeoplePage,
+          page: PeopleWrapper,
           children: [
+            AutoRoute(path: '', page: PeoplePage),
             AutoRoute(path: ':peopleId', page: PeopleDetailsPage),
           ],
         ),

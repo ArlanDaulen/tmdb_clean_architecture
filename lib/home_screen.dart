@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:tmdb_clean_architecture/features/people/presentation/pages/people_wrapper.dart';
 import 'package:tmdb_clean_architecture/routes/router.gr.dart';
 import 'package:tmdb_clean_architecture/shared/utils.dart';
 import 'package:tmdb_clean_architecture/shared/widgets/default_text.dart';
@@ -41,7 +42,7 @@ class HomeScreen extends StatelessWidget {
         HomeWrapperRoute(),
         MoviesWrapperRoute(),
         SeriesWrapperRoute(),
-        PeoplePageRoute(),
+        PeopleWrapperRoute(),
         MenuPageRoute(),
       ],
     );
